@@ -27,7 +27,8 @@ public class WelcomeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 ParseUser.logOut();
                 txtWelcome.setText("Please Login to resume");
-                Intent intent = new Intent(WelcomeActivity.this, SignUpLoginActivity.class);
+//                Intent intent = new Intent(WelcomeActivity.this, SignUpLoginActivity.class);
+                finish();
             }
         });
 
