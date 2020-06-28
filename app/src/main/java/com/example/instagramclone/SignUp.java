@@ -58,7 +58,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
             }
         });
 
-        /*btnGetAllData.setOnClickListener(new View.OnClickListener() {
+        btnGetAllData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 allKickBoxers = "";
@@ -80,7 +80,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                     }
                 });
             }
-        });*/
+        });
     }
 
     @Override
