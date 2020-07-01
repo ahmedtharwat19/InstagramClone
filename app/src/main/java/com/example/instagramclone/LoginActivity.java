@@ -47,13 +47,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btnLoginActivity.setOnClickListener(this);
 
         if (ParseUser.getCurrentUser() != null) {
-            ParseUser.getCurrentUser().logOut();
+//            ParseUser.getCurrentUser().logOut();
+            finish();
+            transationToSocialMediaActivity();
         }
 
     }
 
     @Override
     public void onClick(View view) {
+        rootLayoutTapped(view);
         switch (view.getId()) {
             case R.id.btnLoginActivity:
                 if (edtLoginEmail.getText().toString().equals("") ||
@@ -68,6 +71,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             if (user != null && e == null) {
                                 FancyToast.makeText(LoginActivity.this, user.getUsername() + " is Logged In successfully",
                                         FancyToast.LENGTH_LONG, FancyToast.SUCCESS, true).show();
+                                finish();
+                                transationToSocialMediaActivity();
                             } else {
                                 FancyToast.makeText(LoginActivity.this, "There was an error: " + e.getMessage(),
                                         FancyToast.LENGTH_LONG, FancyToast.ERROR, true).show();
@@ -79,6 +84,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btnSignupLoginActivity:
                 Intent intent = new Intent(LoginActivity.this, SignUp.class);
                 startActivity(intent);
+                finish();
                 break;
         }
     }
@@ -91,6 +97,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             e.printStackTrace();
 
         }
+    }
+
+    public void transationToSocialMediaActivity(){
+        Intent intent = new Intent(LoginActivity.this, SocialMediaActivity.class);
+        startActivity(intent);
     }
 
 }

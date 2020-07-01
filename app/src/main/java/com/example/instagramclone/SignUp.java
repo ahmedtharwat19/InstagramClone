@@ -63,7 +63,9 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         btnLogIn.setOnClickListener(this);
 
         if (ParseUser.getCurrentUser() != null){
-            ParseUser.getCurrentUser().logOut();
+            //ParseUser.getCurrentUser().logOut();
+            finish();
+            transationToSocialMediaActivity();
         }
 
     }
@@ -72,6 +74,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View view) {
 //        dismissKeyboard(SignUp.this);
+        rootLayoutTapped(view);
         switch (view.getId()){
             case R.id.btnSignUp:
 
@@ -98,6 +101,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                             if (e == null) {
                                 FancyToast.makeText(SignUp.this, appUser.getUsername() + " is signed up",
                                         FancyToast.LENGTH_LONG, FancyToast.SUCCESS, true).show();
+                                finish();
+                                transationToSocialMediaActivity();
                             } else {
                                 FancyToast.makeText(SignUp.this, "There was an error: " + e.getMessage(), FancyToast.LENGTH_LONG, FancyToast.ERROR, true).show();
                             }
@@ -109,6 +114,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
             case R.id.btnLogIn:
                 Intent intent = new Intent(SignUp.this, LoginActivity.class);
                 startActivity(intent);
+                finish();
                 break;
         }
 
@@ -131,4 +137,10 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
         }
     }
+
+    public void transationToSocialMediaActivity(){
+        Intent intent = new Intent(SignUp.this, SocialMediaActivity.class);
+        startActivity(intent);
+    }
+
 }
