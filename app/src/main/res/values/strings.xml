@@ -30,4 +30,13 @@
     <string name="login_failed">"Login failed"</string>
     <string name="please_enter_an_email">Please enter an email...</string>
     <string name="please_enter_a_password">Please Enter a password...</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="please_enter_a_profile_name">please enter a profile name...</string>
+    <string name="please_enter_your_bio">please enter your bio...</string>
+    <string name="please_enter_your_profission">please enter your profission...</string>
+    <string name="please_enter_your_hobbies">please enter your hobbies...</string>
+    <string name="update_info">Update info</string>
+    <string name="please_enter_your_favorite_sport">please enter your favorite sport...</string>
+    <string name="loading_users_please_wait">Loading Users ... Please wait...</string>
 </resources>
