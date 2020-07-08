@@ -1,10 +1,6 @@
 package com.example.instagramclone;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -12,22 +8,13 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.parse.FindCallback;
-import com.parse.GetCallback;
-import com.parse.Parse;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
 import com.shashank.sony.fancytoastlib.FancyToast;
-
-import java.io.File;
-import java.util.List;
 
 public class SignUp extends AppCompatActivity implements View.OnClickListener {
     private EditText edtEnterEmail, edtUsername, edtEnterPassword;
@@ -92,7 +79,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
 
                     final ProgressDialog progressDialog = new ProgressDialog(this);
-                    progressDialog.setMessage("Signing Up" + edtUsername.getText().toString());
+                    progressDialog.setMessage("Signing Up " + edtUsername.getText().toString());
                     progressDialog.show();
 
                     appUser.signUpInBackground(new SignUpCallback() {
@@ -141,6 +128,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     public void transationToSocialMediaActivity(){
         Intent intent = new Intent(SignUp.this, SocialMediaActivity.class);
         startActivity(intent);
+        finish();
     }
 
 }

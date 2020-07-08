@@ -39,4 +39,7 @@
     <string name="update_info">Update info</string>
     <string name="please_enter_your_favorite_sport">please enter your favorite sport...</string>
     <string name="loading_users_please_wait">Loading Users ... Please wait...</string>
+    <string name="share_image">share image</string>
+    <string name="please_entre_a_description_to_your_image">Please entre a description to your image...</string>
+    <string name="todo">TODO</string>
 </resources>
