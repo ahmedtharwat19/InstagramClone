@@ -20,7 +20,7 @@
         android:adjustViewBounds="true"
         android:contentDescription="@string/todo"
         android:cropToPadding="true"
-        android:scaleType="centerCrop"
+        android:scaleType="fitCenter"
         android:src="@drawable/samir_rayan_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -1,18 +1,20 @@
 package com.example.instagramclone;
 
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+
+import com.example.flatdialoglibrary.dialog.FlatDialog;
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -25,9 +27,9 @@ import java.util.List;
  * Use the {@link UserTab#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class UserTab extends Fragment {
+public class UserTab extends Fragment implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
     private ListView listView;
-    private ArrayList arrayList;
+    private ArrayList<String> arrayList;
     private ArrayAdapter arrayAdapter;
     private TextView txtLoadingUsers;
 
@@ -80,8 +82,11 @@ public class UserTab extends Fragment {
         arrayList = new ArrayList();
         txtLoadingUsers = view.findViewById(R.id.txtLoadingUsers);
         arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, arrayList);
+        listView.setOnItemClickListener(UserTab.this);
+        listView.setOnItemLongClickListener(UserTab.this);
+
         ParseQuery<ParseUser> parseQuery = ParseUser.getQuery();
-        parseQuery.whereNotEqualTo("userName",ParseUser.getCurrentUser().getUsername());
+        parseQuery.whereNotEqualTo("username",ParseUser.getCurrentUser().getUsername());
         parseQuery.findInBackground(new FindCallback<ParseUser>() {
             @Override
             public void done(List<ParseUser> users, ParseException e) {
@@ -99,5 +104,40 @@ public class UserTab extends Fragment {
         });
 
         return view;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+
+        Intent intent = new Intent(getContext(), UsersPosts.class);
+        intent.putExtra("username", arrayList.get(position));
+        startActivity(intent);
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l) {
+        final ParseQuery<ParseUser> parseQuery = ParseUser.getQuery();
+        parseQuery.whereEqualTo("username", arrayList.get(position));
+        parseQuery.getFirstInBackground(new GetCallback<ParseUser>() {
+            @Override
+            public void done(ParseUser user, ParseException e) {
+                if (user != null && e == null){
+                    final FlatDialog flatDialog = new FlatDialog(getContext());
+                    flatDialog.setTitle(user.getUsername() + " 's Info");
+                    flatDialog.setSubtitle(user.get("profileBio") + "\n"
+                                            + user.get("profileProfission") + "\n"
+                                            + user.get("profileHobbies") + "\n"
+                                            + user.get("profileFavoriteSport")).setIcon(R.drawable.person)
+                            .setFirstButtonText("OK")
+                            .setFirstButtonColor(R.color.pdlg_color_white).withFirstButtonListner(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            flatDialog.dismiss();
+                        }
+                    }).show();
+                }
+            }
+        });
+        return false;
     }
 }
